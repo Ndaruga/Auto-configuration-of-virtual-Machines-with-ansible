@@ -10,15 +10,15 @@
 <div>
 <p>Table of Contents</p>
   <ul>
-    <li><a class="ez-toc-link ez-toc-heading-1" href="#prerequisites">Prerequisites:</a></li>
-    <li><a class="ez-toc-link ez-toc-heading-2" href="#method-1install-ansible-on-centos-8-with-yum-package">Method #1.Install Ansible on CentOS 8 with yum package</a></li>
-    <li><a class="ez-toc-link ez-toc-heading-3" href="#method-2install-ansible-on-centos-8-using-pip">Method #2.Install Ansible on CentOS 8 using pip</a></li>
-    <li><a href="#3create-inventory-file-in-ansible" title="#3.Create Inventory file in Ansible">#3.Create Inventory file in Ansible</a></li>
-    <li><a href="#4configuration-of-ansible-server" title="#4.Configuration of Ansible server">#4.Configuration of Ansible server</a></li>
-    <li><a href="#5add-user-to-the-sudo-group" title="#5.Add User to the sudo Group">#5.Add User to the sudo Group</a></li>
-    <li><a href="#6update-ssh-config-file" title="#6.Update ssh_config file">#6.Update ssh_config file</a></li>
-    <li><a href="#7establish-connection-between-server-and-node" title="#7.Establish connection between server and node">#7.Establish connection between server and node</a></li>
-    <li><a href="#8setup-ssh-keys-and-share-it-among-managed-nodes" title="#8.Setup SSH keys and share it among managed nodes">#8.Setup SSH keys and share it among managed nodes</a></li>
+    <li><a href="#prerequisites">Prerequisites:</a></li>
+    <li><a href="#method-1install-ansible-on-centos-8-with-yum-package">Method #1.Install Ansible on CentOS 8 with yum package</a></li>
+    <li><a href="#method-2install-ansible-on-centos-8-using-pip">Method #2.Install Ansible on CentOS 8 using pip</a></li>
+    <li><a href="#3create-inventory-file-in-ansible">#3.Create Inventory file in Ansible</a></li>
+    <li><a href="#4configuration-of-ansible-server">#4.Configure ansible controller</a></li>
+    <li><a href="#5add-user-to-the-sudo-group">#5.Add User to the sudo Group</a></li>
+    <li><a href="#6update-ssh-config-file">#6.Update ssh_config file</a></li>
+    <li><a href="#7establish-connection-between-server-and-node">#7.Establish connection between server and node</a></li>
+    <li><a href="#8setup-ssh-keys-and-share-it-among-managed-nodes">#8.Setup SSH keys and share it among managed nodes</a></li>
   </ul> </nav></div>
 <h2><strong>Prerequisites:</strong></h2>
 
@@ -28,17 +28,17 @@
   <li>A good internet connection</li>
 </ul>
 
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="method-1install-ansible-on-centos-8-with-yum-package"></span><strong>Method #1.Install Ansible on CentOS 8 with yum package</strong><span class="ez-toc-section-end"></span></h2>
+<h2><strong>Method #1.Install Ansible on CentOS 8 with yum package</strong></h2>
 
 <p>Now we are going to run below commands on Ansible server&nbsp;</p>
 
 <p>Step1: Firstly we need to install EPEL repository on CentOS 8:</p>
 
-<pre class="wp-block-preformatted">yum install epel-release -y</pre>
+<code><pre>yum install epel-release -y</pre></code>
 
 <p>Step2: If you wants to check repositories on CentOS then run the below command:</p>
 
-<pre class="wp-block-preformatted">yum repolist | grep epel</pre>
+<code><pre>yum repolist | grep epel</pre></code>
 
 <p>Output:</p>
 
@@ -48,11 +48,11 @@ epel-modular       Extra Packages for Enterprise Linux Modular 8 - x86_64
 
 <p>Step3: Install ansible on CentOS 8 using below command:</p>
 
-<pre class="wp-block-preformatted">yum install ansible -y</pre>
+<code><pre>yum install ansible -y</pre></code>
 
 <p>Step4: To check ansible version:</p>
 
-<pre class="wp-block-preformatted">ansible --version</pre>
+<code><pre>ansible --version</pre></code>
 
 <p>Output:</p>
 
@@ -69,7 +69,7 @@ epel-modular       Extra Packages for Enterprise Linux Modular 8 - x86_64
 
 <p>Uninstall ansible on CentOS 8:</p>
 
-<pre class="wp-block-preformatted">yum remove ansible -y</pre>
+<code><pre>yum remove ansible -y</pre></code>
 
 <h2 class="wp-block-heading"><span class="ez-toc-section" id="method-2install-ansible-on-centos-8-using-pip"></span><strong>Method</strong> #<strong>2.Install Ansible on CentOS 8 using pip</strong><span class="ez-toc-section-end"></span></h2>
 
@@ -77,23 +77,23 @@ epel-modular       Extra Packages for Enterprise Linux Modular 8 - x86_64
 
 <p>Step1: If you’re using Python3, install the python3-pip package.</p>
 
-<pre class="wp-block-preformatted">sudo dnf -y install python3-pip</pre>
+<code><pre>sudo dnf -y install python3-pip</pre></code>
 
-<pre class="wp-block-preformatted">sudo pip3 install --upgrade pip</pre>
+<code><pre>sudo pip3 install --upgrade pip</pre></code>
 
 <p>For Python2 users you have to install python2-pip</p>
 
-<pre class="wp-block-preformatted">sudo dnf -y install python2-pip</pre>
+<code><pre>sudo dnf -y install python2-pip</pre></code>
 
-<pre class="wp-block-preformatted">sudo pip2 install --upgrade pip</pre>
+<code><pre>sudo pip2 install --upgrade pip</pre></code>
 
 <p>Step2: Install ansible on CentOS using pip:</p>
 
-<pre class="wp-block-preformatted">pip3 install ansible</pre>
+<code><pre>pip3 install ansible</pre></code>
 
 <p>Step3: To check ansible version:</p>
 
-<pre class="wp-block-preformatted">/usr/local/bin/ansible --version</pre>
+<code><pre>/usr/local/bin/ansible --version</pre></code>
 
 <p>Output:</p>
 
@@ -113,17 +113,17 @@ ansible &#91;core 2.11.8]
 
 <p>Step1: To test Ansible, firstly ensure that ssh is up and running on your Ansible server:</p>
 
-<pre class="wp-block-preformatted">sudo systemctl status sshd</pre>
+<code><pre>sudo systemctl status sshd</pre></code>
 
 <p>Step2: Create ansible inventory file using below command in Ansible server:</p>
 
-<pre class="wp-block-preformatted">sudo mkdir /etc/ansible&nbsp;&nbsp;</pre>
+<code><pre>sudo mkdir /etc/ansible&nbsp;&nbsp;</pre></code>
 
-<pre class="wp-block-preformatted">&nbsp;cd /etc/ansible</pre>
+<code><pre>&nbsp;cd /etc/ansible</pre></code>
 
-<pre class="wp-block-preformatted">sudo touch hosts</pre>
+<code><pre>sudo touch hosts</pre></code>
 
-<pre class="wp-block-preformatted">sudo vi /etc/ansible/hosts</pre>
+<code><pre>sudo vi /etc/ansible/hosts</pre></code>
 
 <p>Copy the IP address of your remote servers and paste in host file</p>
 
@@ -137,7 +137,7 @@ ansible &#91;core 2.11.8]
 
 <p>Step1: Now this host file is only working after updating ansible.cfg file so we need to update config file in Ansible server using below command:</p>
 
-<pre class="wp-block-preformatted">sudo vi /etc/ansible/ansible.cfg</pre>
+<code><pre>sudo vi /etc/ansible/ansible.cfg</pre></code>
 
 <p>Then uncommited two file</p>
 
@@ -147,13 +147,13 @@ ii) sudo-user = root
 
 <p>Step2: Now, create one user in all these instance(Ansible server and nodes)</p>
 
-<pre class="wp-block-preformatted">sudo adduser ansible</pre>
+<code><pre>sudo adduser ansible</pre></code>
 
-<pre class="wp-block-preformatted">sudo passwd ansible</pre>
+<code><pre>sudo passwd ansible</pre></code>
 
 <p>now navigate the Ansible user&nbsp;</p>
 
-<pre class="wp-block-preformatted">su - ansible&nbsp;</pre>
+<code><pre>su - ansible&nbsp;</pre></code>
 
 <p>try to create a some file and install some package</p>
 
@@ -167,11 +167,11 @@ ii) sudo-user = root
 
 <p>Step1: Then give some privileged in all nodes(ansible server and node) using below command:</p>
 
-<pre class="wp-block-preformatted">&nbsp;&nbsp;sudo visudo&nbsp;</pre>
+<code><pre>&nbsp;&nbsp;sudo visudo&nbsp;</pre></code>
 
 <p>go to inside this file and add&nbsp;</p>
 
-<pre class="wp-block-preformatted">ansible ALL=(ALL) NOPASSWD:ALL</pre>
+<code><pre>ansible ALL=(ALL) NOPASSWD:ALL</pre></code>
 
 <h2 class="wp-block-heading"><span class="ez-toc-section" id="6update-ssh-config-file"></span><strong>#6.Update ssh_config file</strong><span class="ez-toc-section-end"></span></h2>
 
@@ -179,7 +179,7 @@ ii) sudo-user = root
 
 <p>Step1: Now we have to some changes in ssh-config file in Ansible server and  nodes:</p>
 
-<pre class="wp-block-preformatted">vi /etc/ssh/sshd_config</pre>
+<code><pre>vi /etc/ssh/sshd_config</pre></code>
 
 <p>Then you need to uncomment these two lines</p>
 
@@ -189,9 +189,9 @@ PasswordAuthentication yes
 
 <p>Now we need to restart sshd service in Ansible server and nodes:</p>
 
-<pre class="wp-block-preformatted">sudo systemctl restart sshd</pre>
+<code><pre>sudo systemctl restart sshd</pre></code>
 
-<pre class="wp-block-preformatted">sudo systemctl status sshd</pre>
+<code><pre>sudo systemctl status sshd</pre></code>
 
 <h2 class="wp-block-heading"><span class="ez-toc-section" id="7establish-connection-between-server-and-node"></span><strong>#7.Establish connection between server and node</strong><span class="ez-toc-section-end"></span></h2>
 
@@ -199,11 +199,11 @@ PasswordAuthentication yes
 
 <p>Step1: login to ansible in ansible server using below command:</p>
 
-<pre class="wp-block-preformatted">su - ansible</pre>
+<code><pre>su - ansible</pre></code>
 
 <p>Step2: Run the below command to connect node:</p>
 
-<pre class="wp-block-preformatted">ssh ip_address ( node ip)</pre>
+<code><pre>ssh ip_address ( node ip)</pre></code>
 
 <h2 class="wp-block-heading"><span class="ez-toc-section" id="8setup-ssh-keys-and-share-it-among-managed-nodes"></span><strong><strong>#8.Setup SSH keys and share it among managed nodes</strong></strong><span class="ez-toc-section-end"></span></h2>
 
@@ -211,13 +211,13 @@ PasswordAuthentication yes
 
 <p>Step1: we need to generate ssh keygen in Ansible server</p>
 
-<pre class="wp-block-preformatted">ssh-keygen&nbsp;</pre>
+<code><pre>ssh-keygen&nbsp;</pre></code>
 
 <p>Step2: you need to inside .ssh:</p>
 
-<pre class="wp-block-preformatted">cd .ssh</pre>
+<code><pre>cd .ssh</pre></code>
 
 <p>Step3:Now run the below command using private ip of your node:</p>
 
-<pre class="wp-block-preformatted">ssh-copy-id ansible@{private address }&nbsp;</pre>
+<code><pre>ssh-copy-id ansible@{private address }&nbsp;</pre></code>
 
