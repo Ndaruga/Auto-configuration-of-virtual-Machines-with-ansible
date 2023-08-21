@@ -30,13 +30,13 @@
 
 <h2><strong>Method #1.Install Ansible on CentOS 8 with yum package</strong></h2>
 
-<p>Now we are going to run below commands on Ansible server&nbsp;</p>
+<p>Now we are going to run the below commands on Ansible server&nbsp;</p>
 
-<p>Step1: Firstly we need to install EPEL repository on CentOS 8:</p>
+<p>Step1: First we need to install the EPEL repository on CentOS 8:</p>
 
 <pre><code>yum install epel-release -y</code></pre>
 
-<p>Step2: If you wants to check repositories on CentOS then run the below command:</p>
+<p>Step2: If you want to check repositories on CentOS then run the below command:</p>
 
 <pre><code>yum repolist | grep epel</code></pre>
 
@@ -46,7 +46,7 @@
 epel-modular       Extra Packages for Enterprise Linux Modular 8 - x86_64
 </code></pre>
 
-<p>Step3: Install ansible on CentOS 8 using below command:</p>
+<p>Step3: Install ansible on CentOS 8 using the below command:</p>
 
 <pre><code>yum install ansible -y</code></pre>
 
@@ -56,7 +56,7 @@ epel-modular       Extra Packages for Enterprise Linux Modular 8 - x86_64
 
 <p>Output:</p>
 
-<pre class="wp-block-code"><code>ansible &#91;core 2.11.8]
+<pre><code>ansible &#91;core 2.11.8]
   config file = /etc/ansible/ansible.cfg
   configured module search path = &#91;'/home/centos/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
   ansible python module location = /usr/local/lib/python3.6/site-packages/ansible
@@ -71,9 +71,9 @@ epel-modular       Extra Packages for Enterprise Linux Modular 8 - x86_64
 
 <pre><code>yum remove ansible -y</code></pre>
 
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="method-2install-ansible-on-centos-8-using-pip"></span><strong>Method</strong> #<strong>2.Install Ansible on CentOS 8 using pip</strong><span class="ez-toc-section-end"></span></h2>
+<h2><strong>Method</strong> #<strong>2.Install Ansible on CentOS 8 using pip</strong></h2>
 
-<p>Now we are going to run below commands on Ansible server&nbsp;</p>
+<p>Now we are going to run the below commands on Ansible server&nbsp;</p>
 
 <p>Step1: If you’re using Python3, install the python3-pip package.</p>
 
@@ -97,7 +97,7 @@ epel-modular       Extra Packages for Enterprise Linux Modular 8 - x86_64
 
 <p>Output:</p>
 
-<pre class="wp-block-code"><code>
+<pre><code>
 ansible &#91;core 2.11.8]
   config file = None
   configured module search path = &#91;'/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
@@ -109,7 +109,7 @@ ansible &#91;core 2.11.8]
   libyaml = True
 </code></pre>
 
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="3create-inventory-file-in-ansible"></span><strong>#3.Create Inventory file</strong> <strong>in Ansible</strong><span class="ez-toc-section-end"></span></h2>
+<h2>#3.Create Inventory file in Ansible</h2>
 
 <p>Step1: To test Ansible, firstly ensure that ssh is up and running on your Ansible server:</p>
 
@@ -129,11 +129,11 @@ ansible &#91;core 2.11.8]
 
 <p>You can create group and paste ip address like below:</p>
 
-<pre class="wp-block-code"><code>&#91;devopshint]
-65.2.140.xx
-65.2.144.xx</code></pre>
+<pre><code>&#91;VM-Nodes]
+192.168.xx.xx
+172.98.xx.xx</code></pre>
 
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="4configuration-of-ansible-server"></span><strong>#4.Configuration of Ansible server</strong><span class="ez-toc-section-end"></span></h2>
+<h2>#4.Configuration of Ansible server</h2>
 
 <p>Step1: Now this host file is only working after updating ansible.cfg file so we need to update config file in Ansible server using below command:</p>
 
@@ -141,8 +141,9 @@ ansible &#91;core 2.11.8]
 
 <p>Then uncommited two file</p>
 
-<pre class="wp-block-code"><code>i) inventory = /etc /ansible / hosts
-ii) sudo-user = root
+<pre><code>
+  inventory = /etc/ansible/hosts
+  sudo-user = root
 </code></pre>
 
 <p>Step2: Now, create one user in all these instance(Ansible server and nodes)</p>
@@ -155,15 +156,15 @@ ii) sudo-user = root
 
 <pre><code>su - ansible&nbsp;</code></pre>
 
-<p>try to create a some file and install some package</p>
+<p> Try to create some files or install a package</p>
 
 <p>you got some error like this&nbsp;</p>
 
 <p><strong>This ansible user doesn&#8217;t have sudo privileges right now</strong>.&nbsp;</p>
 
-<p>If you want to give sudo privileges to ansible user then run below command</p>
+<p>If you want to give sudo privileges to an ansible user then run the below command</p>
 
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="5add-user-to-the-sudo-group"></span><strong>#5.Add User to the sudo Group</strong><span class="ez-toc-section-end"></span></h2>
+<h2 id="5add-user-to-the-sudo-group">#5.Add User to the sudo Group</h2>
 
 <p>Step1: Then give some privileged in all nodes(ansible server and node) using below command:</p>
 
@@ -173,7 +174,7 @@ ii) sudo-user = root
 
 <pre><code>ansible ALL=(ALL) NOPASSWD:ALL</code></pre>
 
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="6update-ssh-config-file"></span><strong>#6.Update ssh_config file</strong><span class="ez-toc-section-end"></span></h2>
+<h2 id="6update-ssh-config-file">#6.Update ssh_config file</h2>
 
 <p>For SSH connection to node from Ansible server make changes in sshd_config file</p>
 
@@ -183,8 +184,9 @@ ii) sudo-user = root
 
 <p>Then you need to uncomment these two lines</p>
 
-<pre class="wp-block-code"><code>PubkeyAuthentication yes
-PasswordAuthentication yes
+<pre><code>
+  PubkeyAuthentication yes
+  PasswordAuthentication yes
 </code></pre>
 
 <p>Now we need to restart sshd service in Ansible server and nodes:</p>
