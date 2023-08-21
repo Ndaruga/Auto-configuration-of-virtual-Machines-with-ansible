@@ -10,15 +10,15 @@
 <div>
 <p>Table of Contents</p>
   <ul>
-    <li><a href="prerequisites">Prerequisites:</a></li>
-    <li><a href="method-1install-ansible-on-centos-8-with-yum-package">Method 1.Install Ansible on CentOS 8 with yum package</a></li>
-    <li><a href="method-2install-ansible-on-centos-8-using-pip">Method 2.Install Ansible on CentOS 8 using pip</a></li>
-    <li><a href="3create-inventory-file-in-ansible">3.Create Inventory file in Ansible</a></li>
-    <li><a href="4configuration-of-ansible-server">4.Configure ansible controller</a></li>
-    <li><a href="5add-user-to-the-sudo-group">5.Add User to the sudo Group</a></li>
-    <li><a href="6update-ssh-config-file">6.Update ssh_config file</a></li>
-    <li><a href="7establish-connection-between-server-and-node">7.Establish connection between server and node</a></li>
-    <li><a href="8setup-ssh-keys-and-share-it-among-managed-nodes">8.Setup SSH keys and share it among managed nodes</a></li>
+    <li><a href="#prerequisites">Prerequisites:</a></li>
+    <li><a href="#method-1install-ansible-on-centos-8-with-yum-package">Method 1.Install Ansible on CentOS 8 with yum package</a></li>
+    <li><a href="#method-2install-ansible-on-centos-8-using-pip">Method 2.Install Ansible on CentOS 8 using pip</a></li>
+    <li><a href="#3create-inventory-file-in-ansible">3.Create Inventory file in Ansible</a></li>
+    <li><a href="#4configuration-of-ansible-server">4.Configure ansible controller</a></li>
+    <li><a href="#5add-user-to-the-sudo-group">5.Add User to the sudo Group</a></li>
+    <li><a href="#6update-ssh-config-file">6.Update ssh_config file</a></li>
+    <li><a href="#7establish-connection-between-server-and-node">7.Establish connection between server and node</a></li>
+    <li><a href="#8setup-ssh-keys-and-share-it-among-managed-nodes">8.Setup SSH keys and share it among managed nodes</a></li>
   </ul>
 </div>
 <h2>Prerequisites:</h2>
