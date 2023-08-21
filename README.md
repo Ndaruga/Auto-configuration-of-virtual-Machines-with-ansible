@@ -3,21 +3,30 @@
 
 <p>Ansible is a server management tool. <br>It is used to <strong>manage and administer multiple servers</strong> from a central computer. 
 <h6>Ansible doesn’t need any configuration on the server side as Chef or Puppet. You just install Ansible on your computer and manage or administer servers via SSH.</h6> </p>
-<div>
-  <h2>Prerequisites</h2>
-  <p>Essentially to manage multiple virtual machines with Ansible, you need to have- </p>
-</div>
-
-<p>In this article we are going cover How to install Ansible on CentOS 8, Configure Ansible, exchanged SSH keys from master to slave node and Tested the Ansible setup.</p>
+<p>We are going cover How to install and configure Ansible on CentOS 8, exchanged SSH keys from master to slave node, and Test the Ansible setup.</p>
 
 <p>There are two methods from which you can install Ansible on CentOS 8.</p>
 
-<div id="ez-toc-container" class="ez-toc-v2_0_53 counter-hierarchy ez-toc-counter ez-toc-container-direction">
-<p class="ez-toc-title">Table of Contents</p>
-<label for="ez-toc-cssicon-toggle-item-64e2d8930ad4b"><span class=""><span style="display:none;">Toggle</span><span class="ez-toc-icon-toggle-span"><svg style="fill: #2a2a2a;color:#2a2a2a" xmlns="http://www.w3.org/2000/svg" class="list-377408" width="20px" height="20px" viewBox="0 0 24 24" fill="none"><path d="M6 6H4v2h2V6zm14 0H8v2h12V6zM4 11h2v2H4v-2zm16 0H8v2h12v-2zM4 16h2v2H4v-2zm16 0H8v2h12v-2z" fill="currentColor"></path></svg><svg style="fill: #2a2a2a;color:#2a2a2a" class="arrow-unsorted-368013" xmlns="http://www.w3.org/2000/svg" width="10px" height="10px" viewBox="0 0 24 24" version="1.2" baseProfile="tiny"><path d="M18.2 9.3l-6.2-6.3-6.2 6.3c-.2.2-.3.4-.3.7s.1.5.3.7c.2.2.4.3.7.3h11c.3 0 .5-.1.7-.3.2-.2.3-.5.3-.7s-.1-.5-.3-.7zM5.8 14.7l6.2 6.3 6.2-6.3c.2-.2.3-.5.3-.7s-.1-.5-.3-.7c-.2-.2-.4-.3-.7-.3h-11c-.3 0-.5.1-.7.3-.2.2-.3.5-.3.7s.1.5.3.7z"/></svg></span></span></label><input type="checkbox"  id="ez-toc-cssicon-toggle-item-64e2d8930ad4b" checked aria-label="Toggle" /><nav><ul class='ez-toc-list ez-toc-list-level-1 ' ><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-1" href="#prerequisites" title="Prerequisites:">Prerequisites:</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-2" href="#method-1install-ansible-on-centos-8-with-yum-package" title="Method #1.Install Ansible on CentOS 8 with yum package">Method #1.Install Ansible on CentOS 8 with yum package</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-3" href="#method-2install-ansible-on-centos-8-using-pip" title="Method #2.Install Ansible on CentOS 8 using pip">Method #2.Install Ansible on CentOS 8 using pip</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-4" href="#3create-inventory-file-in-ansible" title="#3.Create Inventory file in Ansible">#3.Create Inventory file in Ansible</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-5" href="#4configuration-of-ansible-server" title="#4.Configuration of Ansible server">#4.Configuration of Ansible server</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-6" href="#5add-user-to-the-sudo-group" title="#5.Add User to the sudo Group">#5.Add User to the sudo Group</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-7" href="#6update-ssh-config-file" title="#6.Update ssh_config file">#6.Update ssh_config file</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-8" href="#7establish-connection-between-server-and-node" title="#7.Establish connection between server and node">#7.Establish connection between server and node</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-9" href="#8setup-ssh-keys-and-share-it-among-managed-nodes" title="#8.Setup SSH keys and share it among managed nodes">#8.Setup SSH keys and share it among managed nodes</a></li></ul></nav></div>
-<h2 class="wp-block-heading"><span class="ez-toc-section" id="prerequisites"></span><strong>Prerequisites:</strong><span class="ez-toc-section-end"></span></h2>
+<div>
+<p>Table of Contents</p>
+  <ul>
+    <li><a class="ez-toc-link ez-toc-heading-1" href="#prerequisites">Prerequisites:</a></li>
+    <li><a class="ez-toc-link ez-toc-heading-2" href="#method-1install-ansible-on-centos-8-with-yum-package">Method #1.Install Ansible on CentOS 8 with yum package</a></li>
+    <li><a class="ez-toc-link ez-toc-heading-3" href="#method-2install-ansible-on-centos-8-using-pip">Method #2.Install Ansible on CentOS 8 using pip</a></li>
+    <li><a href="#3create-inventory-file-in-ansible" title="#3.Create Inventory file in Ansible">#3.Create Inventory file in Ansible</a></li>
+    <li><a href="#4configuration-of-ansible-server" title="#4.Configuration of Ansible server">#4.Configuration of Ansible server</a></li>
+    <li><a href="#5add-user-to-the-sudo-group" title="#5.Add User to the sudo Group">#5.Add User to the sudo Group</a></li>
+    <li><a href="#6update-ssh-config-file" title="#6.Update ssh_config file">#6.Update ssh_config file</a></li>
+    <li><a href="#7establish-connection-between-server-and-node" title="#7.Establish connection between server and node">#7.Establish connection between server and node</a></li>
+    <li><a href="#8setup-ssh-keys-and-share-it-among-managed-nodes" title="#8.Setup SSH keys and share it among managed nodes">#8.Setup SSH keys and share it among managed nodes</a></li>
+  </ul> </nav></div>
+<h2><strong>Prerequisites:</strong></h2>
 
-<ul><li>Minimum 3 instance of CentOS 1 for Ansible server and another 2 for Nodes</li><li>SSH access with sudo privileges</li><li>A good internet connection</li></ul>
+<ul>
+  <li>Minimum 3 instances of CentOS 1 for Ansible server and another 2 for Nodes</li>
+  <li>SSH access with sudo privileges</li>
+  <li>A good internet connection</li>
+</ul>
 
 <h2 class="wp-block-heading"><span class="ez-toc-section" id="method-1install-ansible-on-centos-8-with-yum-package"></span><strong>Method #1.Install Ansible on CentOS 8 with yum package</strong><span class="ez-toc-section-end"></span></h2>
 
