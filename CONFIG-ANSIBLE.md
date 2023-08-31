@@ -14,21 +14,21 @@
     <li><a href="#setup-ssh-keys-and-share-it-among-managed-nodes">Setup SSH keys and share it among managed nodes</a></li>
   </ol>
 </div>
-<h2>1. Prerequisites:</h2>
+<h2 id="prerequisites">1. Prerequisites:</h2>
 
 <ul>
-  <li>Minimum 3 instances of CentOS 1 for Ansible Controller and another 2 for Nodes</li>
+  <li>Minimum 3 VM instances of CentOS 1 for Ansible Controller and another 2 for Nodes</li>
   <li>SSH access with sudo privileges</li>
   <li>A good internet connection</li>
 </ul>
 
-<h2>2. Install Ansible on CentOS 8</h2>
+<h2 id="install-ansible-on-centos-8">2. Install Ansible on CentOS 8</h2>
 <p>There are two methods from which you can install Ansible on CentOS 8.</p>
 <ol>
   <li><a href="#install-ansible-on-centos-8-with-yum-package">Install Ansible on CentOS 8 with yum package</a></li>
   <li><a href="#install-ansible-on-centos-8-using-pip">Install Ansible on CentOS 8 using pip</a></li>
 </ol>
-<p>If ansible is aleady installed on your controller, you can skip to step 3</p>
+<p>If ansible is aleady installed on your controller, you can skip to <a href="#create-inventory-file-in-ansible">Creating Inventory file in Ansible</a></p>
 <h3 id=install-ansible-on-centos-8-with-yum-package>Method 1.Install Ansible on CentOS 8 with yum package</h3>
 <p>Now we are going to run the below commands on Ansible Controller</p>
 
@@ -94,9 +94,7 @@ libyaml = True
 <p>Step3: To check ansible version:</p>
 
 <pre><code>/usr/local/bin/ansible --version</code></pre>
-
 <p>Output:</p>
-
 <pre>
 ansible &91;core 2.11.8]
 config file = None
@@ -109,7 +107,8 @@ jinja version = 2.10.1
 libyaml = True
 </pre>
 
-<h2>2. Create Inventory file in Ansible</h2>
+
+<h2 id="create-inventory-file-in-ansible">2. Create Inventory file in Ansible</h2>
 
 <p>Step1: To test Ansible, firstly ensure that ssh is up and running on your Ansible Controller:</p>
 
@@ -129,7 +128,7 @@ libyaml = True
 192.168.xx.xx
 172.98.xx.xx</code></pre>
 
-<h2>3. Configuration of Ansible Controller</h2>
+<h2 id="configuration-of-ansible-server">3. Configuration of Ansible Controller</h2>
 
 <p>Step1: Now this host file is only working after updating ansible.cfg file so we need to update config file in Ansible Controller using below command:</p>
 
@@ -160,7 +159,8 @@ sudo-user = root
 
 <p>If you want to give sudo privileges to an ansible user then run the below command</p>
 
-<h2>4. Add User to the sudo Group</h2>
+
+<h2 id="add-user-to-the-sudo-group">4. Add User to the sudo Group</h2>
 
 <p>Step1: Then give some privileged in all nodes(Ansible Controller and node) using below command:</p>
 
@@ -170,7 +170,7 @@ sudo-user = root
 
 <pre><code>ansible ALL=(ALL) NOPASSWD:ALL</code></pre>
 
-<h2>5. Update ssh_config file</h2>
+<h2 id="update-ssh-config-file">5. Update ssh_config file</h2>
 
 <p>For SSH connection to node from Ansible Controller make changes in sshd_config file</p>
 
@@ -190,7 +190,7 @@ PasswordAuthentication yes
 
 <pre><code>sudo systemctl status sshd</code></pre>
 
-<h2>6. Establish connection between server and node</h2>
+<h2 id="establish-connection-between-server-and-node">6. Establish connection between server and node</h2>
 
 <p>Go to Ansible Controller and run the below command</p>
 
