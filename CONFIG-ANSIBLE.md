@@ -6,12 +6,12 @@
   <ol>
     <li><a href="#prerequisites">Prerequisites:</a></li>
     <li><a href="#install-ansible-on-centos-8">Install Ansible on CentOS 8</a></li>
-    <li><a href="#3create-inventory-file-in-ansible">Create Inventory file in Ansible</a></li>
-    <li><a href="#4configuration-of-ansible-server">Configure ansible controller</a></li>
-    <li><a href="#5add-user-to-the-sudo-group">Add User to the sudo Group</a></li>
-    <li><a href="#6update-ssh-config-file">Update ssh_config file</a></li>
-    <li><a href="#7establish-connection-between-server-and-node">Establish connection between server and node</a></li>
-    <li><a href="#7setup-ssh-keys-and-share-it-among-managed-nodes">Setup SSH keys and share it among managed nodes</a></li>
+    <li><a href="#create-inventory-file-in-ansible">Create Inventory file in Ansible</a></li>
+    <li><a href="#configuration-of-ansible-server">Configure ansible controller</a></li>
+    <li><a href="#add-user-to-the-sudo-group">Add User to the sudo Group</a></li>
+    <li><a href="#update-ssh-config-file">Update ssh_config file</a></li>
+    <li><a href="#establish-connection-between-server-and-node">Establish connection between server and node</a></li>
+    <li><a href="#setup-ssh-keys-and-share-it-among-managed-nodes">Setup SSH keys and share it among managed nodes</a></li>
   </ol>
 </div>
 <h2>1. Prerequisites:</h2>
