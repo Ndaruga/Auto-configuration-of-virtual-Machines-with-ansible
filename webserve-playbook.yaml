@@ -1,0 +1,29 @@
+---
+- name: Update Nodes and Install Apache
+  hosts: all  # Replace with the appropriate host or group of hosts
+  become: true  # This allows the playbook to run with root privileges
+
+  tasks:
+    - name: Update the system packages
+      apt:
+        name: "*"
+        state: latest
+      when: ansible_os_family == 'Debian'
+
+    - name: Update the system packages
+      yum:
+        name: "*"
+        state: latest
+      when: ansible_os_family == 'RedHat'
+
+    - name: Install Apache web server
+      apt:
+        name: apache2
+        state: present
+      when: ansible_os_family == 'Debian'
+
+    - name: Install Apache web server
+      yum:
+        name: httpd
+        state: present
+      when: ansible_os_family == 'RedHat'
