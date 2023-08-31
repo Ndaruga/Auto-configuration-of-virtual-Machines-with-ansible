@@ -1,23 +1,20 @@
 # Install and configure ansible on the server
-<p>We are going cover How to install and configure Ansible on CentOS 8, exchanged SSH keys from master to slave node, and Test the Ansible setup.</p>
-
-<p>There are two methods from which you can install Ansible on CentOS 8.</p>
+<p>Install and configure Ansible on CentOS 8, exchanged SSH keys from master to slave node, and Test the Ansible setup.</p>
 
 <div>
 <p>Table of Contents</p>
-  <ul>
+  <ol>
     <li><a href="#prerequisites">Prerequisites:</a></li>
-    <li><a href="#method-1install-ansible-on-centos-8-with-yum-package">Method 1.Install Ansible on CentOS 8 with yum package</a></li>
-    <li><a href="#method-2install-ansible-on-centos-8-using-pip">Method 2.Install Ansible on CentOS 8 using pip</a></li>
-    <li><a href="#3create-inventory-file-in-ansible">3.Create Inventory file in Ansible</a></li>
-    <li><a href="#4configuration-of-ansible-server">4.Configure ansible controller</a></li>
-    <li><a href="#5add-user-to-the-sudo-group">5.Add User to the sudo Group</a></li>
-    <li><a href="#6update-ssh-config-file">6.Update ssh_config file</a></li>
-    <li><a href="#7establish-connection-between-server-and-node">7.Establish connection between server and node</a></li>
-    <li><a href="#8setup-ssh-keys-and-share-it-among-managed-nodes">8.Setup SSH keys and share it among managed nodes</a></li>
-  </ul>
+    <li><a href="#install-ansible-on-centos-8">Install Ansible on CentOS 8</a></li>
+    <li><a href="#3create-inventory-file-in-ansible">Create Inventory file in Ansible</a></li>
+    <li><a href="#4configuration-of-ansible-server">Configure ansible controller</a></li>
+    <li><a href="#5add-user-to-the-sudo-group">Add User to the sudo Group</a></li>
+    <li><a href="#6update-ssh-config-file">Update ssh_config file</a></li>
+    <li><a href="#7establish-connection-between-server-and-node">Establish connection between server and node</a></li>
+    <li><a href="#7setup-ssh-keys-and-share-it-among-managed-nodes">Setup SSH keys and share it among managed nodes</a></li>
+  </ol>
 </div>
-<h2>Prerequisites:</h2>
+<h2>1. Prerequisites:</h2>
 
 <ul>
   <li>Minimum 3 instances of CentOS 1 for Ansible Controller and another 2 for Nodes</li>
@@ -25,8 +22,14 @@
   <li>A good internet connection</li>
 </ul>
 
-<h2><strong>Method 1.Install Ansible on CentOS 8 with yum package</strong></h2>
-
+<h2>2. Install Ansible on CentOS 8</h2>
+<p>There are two methods from which you can install Ansible on CentOS 8.</p>
+<ol>
+  <li><a href="#install-ansible-on-centos-8-with-yum-package">Install Ansible on CentOS 8 with yum package</a></li>
+  <li><a href="#install-ansible-on-centos-8-using-pip">Install Ansible on CentOS 8 using pip</a></li>
+</ol>
+<p>If ansible is aleady installed on your controller, you can skip to step 3</p>
+<h3 id=install-ansible-on-centos-8-with-yum-package>Method 1.Install Ansible on CentOS 8 with yum package</h3>
 <p>Now we are going to run the below commands on Ansible Controller</p>
 
 <p>Step1: First we need to install the EPEL repository on CentOS 8:</p>
@@ -68,7 +71,7 @@ libyaml = True
 
 <pre><code>yum remove ansible -y</code></pre>
 
-<h2>Method 2.Install Ansible on CentOS 8 using pip</h2>
+<h3 id="install-ansible-on-centos-8-using-pip">Method 2. Install Ansible on CentOS 8 using python pip</h3>
 
 <p>Now we are going to run the below commands on Ansible Controller</p>
 
@@ -106,7 +109,7 @@ jinja version = 2.10.1
 libyaml = True
 </pre>
 
-<h2>3.Create Inventory file in Ansible</h2>
+<h2>2. Create Inventory file in Ansible</h2>
 
 <p>Step1: To test Ansible, firstly ensure that ssh is up and running on your Ansible Controller:</p>
 
@@ -126,7 +129,7 @@ libyaml = True
 192.168.xx.xx
 172.98.xx.xx</code></pre>
 
-<h2>4.Configuration of Ansible Controller</h2>
+<h2>3. Configuration of Ansible Controller</h2>
 
 <p>Step1: Now this host file is only working after updating ansible.cfg file so we need to update config file in Ansible Controller using below command:</p>
 
@@ -157,7 +160,7 @@ sudo-user = root
 
 <p>If you want to give sudo privileges to an ansible user then run the below command</p>
 
-<h2>5.Add User to the sudo Group</h2>
+<h2>4. Add User to the sudo Group</h2>
 
 <p>Step1: Then give some privileged in all nodes(Ansible Controller and node) using below command:</p>
 
@@ -167,7 +170,7 @@ sudo-user = root
 
 <pre><code>ansible ALL=(ALL) NOPASSWD:ALL</code></pre>
 
-<h2>6.Update ssh_config file</h2>
+<h2>5. Update ssh_config file</h2>
 
 <p>For SSH connection to node from Ansible Controller make changes in sshd_config file</p>
 
@@ -187,7 +190,7 @@ PasswordAuthentication yes
 
 <pre><code>sudo systemctl status sshd</code></pre>
 
-<h2>7.Establish connection between server and node</h2>
+<h2>6. Establish connection between server and node</h2>
 
 <p>Go to Ansible Controller and run the below command</p>
 
@@ -199,7 +202,8 @@ PasswordAuthentication yes
 
 <pre><code>ssh ip_address ( node ip)</code></pre>
 
-<h2>8.Setup SSH keys and share it among managed nodes</h2>
+
+<h2 id="setup-ssh-keys-and-share-it-among-managed-nodes">7. Setup SSH keys and share it among managed nodes</h2>
 
 <p>To communicate with the client we have to generate SSH key on the Ansible Controller node and exchange it with Slave/Client Systems.</p>
 
@@ -207,12 +211,9 @@ PasswordAuthentication yes
 
 <pre><code>ssh-keygen</code></pre>
 
-<p>Step2: you need to inside .ssh:</p>
-
-<pre><code>cd .ssh</code></pre>
-
-<p>Step3:Now run the below command using the private IP of your node:</p>
+<p>Step2:Now run the below command using the private IP of your node:</p>
 
 <pre><code>ssh-copy-id ansible@{private address }</code></pre>
+
 
 
