@@ -92,7 +92,8 @@ else
 		echo "ERROR: sshd_config file either doesn't exist or is not writable."
     fi
 fi
-
+# Cleanup
+rm -f $temp_sudoers
 
 # Check if the file exists and is writable
 if [[ -f "$sshd_config_path" && -w "$sshd_config_path" ]]; then
@@ -109,5 +110,36 @@ fi
 
 # Restart the ssh server
 systemctl restart sshd
-systemctl status sshd
+
+### ------------------GENERATE SSH KEY---------------------------#
+su $username
+# Ensure the script is running as the correct user
+if [ "$(id -u)" -eq 0 ]; then
+	echo "This script should not be run as root. Run it as the user for whom you wish to generate the SSH key."
+	exit 1
+fi
+
+# Prompt for SSH key type
+read -p "Enter the type of key to create [rsa, dsa, ecdsa, ed25519]: " key_type
+
+# Prompt for file in which to save the key
+read -p "Enter file in which to save the key (~/.ssh/id_$key_type): " key_file
+
+# If no filename is provided, set a default name based on key type
+if [ -z "$key_file" ]; then
+	key_file="$HOME/.ssh/id_$key_type"
+fi
+
+# Prompt for passphrase (optional)
+read -s -p "Enter passphrase (empty for no passphrase): " passphrase
+echo
+
+# Generate the SSH key
+if [ -z "$passphrase" ]; then
+	ssh-keygen -t "$key_type" -f "$key_file"
+else
+	ssh-keygen -t "$key_type" -f "$key_file" -N "$passphrase"
+fi
+
+echo "SSH key created."
 exit
