@@ -23,7 +23,7 @@ sshd_config_path="/etc/ssh/sshd_config"
 temp_sudoers=$(mktemp)
 # Create a backup and then copy existing sudoers to temp
 cp -p /etc/sudoers $temp_sudoers
-
+chmod 666 $hostfile
 ## ----------------------------------------------------------
 # Function to validate, ping and add IP address to host file
 validate_ip(){
@@ -34,7 +34,6 @@ validate_ip(){
 			if grep -q "$1" "$host_file"; then
 				echo
 			else
-				chmod 646 $hostfile
 				echo "$1" >> "$host_file"
 			fi
 		else
