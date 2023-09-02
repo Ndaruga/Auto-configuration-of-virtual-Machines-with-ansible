@@ -46,6 +46,8 @@ First, you need to download the script `vboxmanage-linux.sh` to your local PC us
 <pre><code>sudo chmod +x vboxmanage-linux.sh</code></pre>
 <pre><code>./vboxmange-linux.sh</code></pre>
 
+## Prerequisites to run the auto-configuration script
+
 ## Configuring Ansible on CentOS 8
 <p>First, you need to download the script  to your Centos 8 Virtual Machine. You can use the wget command to do this directly from the terminal:</p>
 
