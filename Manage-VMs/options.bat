@@ -4,9 +4,10 @@ setlocal
 echo WELCOME TO CONFIGURATION OF VIRTUAL MACHINES
 echo.
 :: Change the path below to the path where virtualbox is installed
-cd /d "C:\Program Files\Oracle\VirtualBox"
+@REM cd /d "C:\Program Files\Oracle\VirtualBox"
+set /d vBoxPath="C:\Program Files\Oracle\VirtualBox"
 :: check version
-for /f %%i in ('VBoxManage --version') do set "version=%%i"
+for /f %%i in ('%vBoxPath% --version') do set "version=%%i"
 echo Your VirtualBox version is: %version%
 echo.
 
@@ -15,19 +16,12 @@ echo.
 echo.
 echo What would you like to do? Please enter the option number from the available options below:
 echo.
-echo 1: List All Registered VMs
-echo 2: List Running VMs
-echo 4: Enable Nested VT-x/AMD-v of a VM
-echo 5: Show VM Info
-echo 6: Modify the amount of RAM assigned to a VM
-echo 7: Modify the number of Virtual CPUs assigned to a VM
-echo 8: Start a VM
-echo 9: Power Off a VM
-echo 10: Pause a VM
-echo 11: Resume a VM
-echo 12: Save the Current State of a VM
-echo 13: Reset a VM
-echo 14: Check Available OS Types
+echo 1. Show the host OS information
+echo 2: List All Registered VMs
+echo 3: List the current Running VMs
+echo 4: Lists all installable guest operating systems
+echo 5: Create a new Virtual Machine
+
 echo.
 
 set /p option=Enter an option:
@@ -35,11 +29,17 @@ echo.
 
 :: Check the option and run the corresponding command
 if "%option%"=="1" (
+    VBoxManage list hostinfo
+) else if "%option%"=="2" (
     echo Registered VMs
     VBoxManage list -s vms
-) else if "%option%"=="2" (
+) else if "%option%"=="3" (
     echo Running VMs
     VBoxManage list runningvms
+) else if "%option%"=="4" (
+    VBoxManage list ostypes
+) else if "%option%"=="5" (
+    call %~dp0createvm.bat
 ) else (
     echo You entered an Invalid option
 )
