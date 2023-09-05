@@ -9,7 +9,7 @@ cd /d "C:\Program Files\Oracle\VirtualBox"
 :: Prompt the user to enter an option
 echo.
 echo.
-echo Available options:
+echo What would you like to do? Please enter the option number from the available options below:
 echo.
 echo 2: List All Running VMs
 echo 3: List all VMs
