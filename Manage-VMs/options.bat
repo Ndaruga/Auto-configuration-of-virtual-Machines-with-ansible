@@ -2,6 +2,11 @@
 
 setlocal
 echo WELCOME TO CONFIGURATION OF VIRTUAL MACHINES
+echo.
+:: check version
+for /f %%i in ('VBoxManage --version') do set "version=%%i"
+echo Your VirtualBox version is: %version%
+echo.
 :: Change the path below to the path where virtualbox is installed
 cd /d "C:\Program Files\Oracle\VirtualBox"
 
@@ -30,10 +35,7 @@ set /p option=Enter an option:
 
 :: Check the option and run the corresponding command
 ::if "%option%" == 1(
-:: check version
-for /f %%i in ('VBoxManage --version') do set "version=%%i"
-echo VirtualBox version: %version%
-echo.
+
 ::) else if "%option%" == "2" (
 VBoxManage list runningvms
 ::) else if "%option%" == "3" (
