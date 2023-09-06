@@ -43,6 +43,8 @@ if "%option%"=="1" (
     call %~dp0createvm.bat
 ) else if "%option%"=="6" (
     call %~dp0modifyVM.bat
+) else if "%option%"=="7" (
+    call %~dp0startvm.bat
 ) else (
     echo You entered an Invalid option
 )
