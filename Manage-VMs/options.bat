@@ -4,10 +4,9 @@ setlocal
 echo WELCOME TO CONFIGURATION OF VIRTUAL MACHINES
 echo.
 :: Change the path below to the path where virtualbox is installed
-@REM cd /d "C:\Program Files\Oracle\VirtualBox"
-set /d vBoxPath="C:\Program Files\Oracle\VirtualBox"
+cd /d "C:\Program Files\Oracle\VirtualBox"
 :: check version
-for /f %%i in ('%vBoxPath% --version') do set "version=%%i"
+for /f %%i in (VBoxManage --version') do set "version=%%i"
 echo Your VirtualBox version is: %version%
 echo.
 
@@ -21,6 +20,8 @@ echo 2: List All Registered VMs
 echo 3: List the current Running VMs
 echo 4: Lists all installable guest operating systems
 echo 5: Create a new Virtual Machine
+echo 6: Modify a Virtual Machine
+echo 7: Start a Virtual Machine
 
 echo.
 
@@ -40,6 +41,8 @@ if "%option%"=="1" (
     VBoxManage list ostypes
 ) else if "%option%"=="5" (
     call %~dp0createvm.bat
+) else if "%option%"=="6" (
+    call %~dp0modifyVM.bat
 ) else (
     echo You entered an Invalid option
 )
