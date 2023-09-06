@@ -22,6 +22,8 @@ echo 4: Lists all installable guest operating systems
 echo 5: Create a new Virtual Machine
 echo 6: Modify a Virtual Machine
 echo 7: Start a Virtual Machine
+echo 8: Control the State of a VM (i.e pause reset, poweroff)
+
 
 echo.
 
@@ -45,6 +47,8 @@ if "%option%"=="1" (
     call %~dp0modifyVM.bat
 ) else if "%option%"=="7" (
     call %~dp0startvm.bat
+) else if "%option%"=="8" (
+    call %~dp0controlVM.bat
 ) else (
     echo You entered an Invalid option
 )
