@@ -14,7 +14,6 @@ if [ "$(cat /etc/centos-release | awk '{print $4}')" == "8" ]; then
     fi
 
     ## Run commands to install ansible on centos 8
-
     ## First, update The DNF package and enable the EPEL repository
     dnf makecache
     dnf install -y epel-release

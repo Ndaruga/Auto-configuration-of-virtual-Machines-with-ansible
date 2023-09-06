@@ -1,12 +1,12 @@
 @echo off
 
 setlocal
-echo WELCOME TO CONFIGURATION OF VIRTUAL MACHINES
+echo MANAGEMENT OF VIRTUAL MACHINES
 echo.
 :: Change the path below to the path where virtualbox is installed
-cd /d "C:\Program Files\Oracle\VirtualBox"
+cd /d "C:\Program Files\Oracle\VirtualBox\"
 :: check version
-for /f %%i in (VBoxManage --version') do set "version=%%i"
+for /f %%i in ('VBoxManage --version') do set "version=%%i"
 echo Your VirtualBox version is: %version%
 echo.
 
@@ -27,7 +27,7 @@ echo 8: Control the State of a VM (i.e pause reset, poweroff)
 
 echo.
 
-set /p option=Enter an option:
+set /p option=Enter an option: 
 echo.
 
 :: Check the option and run the corresponding command
