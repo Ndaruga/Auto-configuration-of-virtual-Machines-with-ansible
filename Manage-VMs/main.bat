@@ -42,13 +42,13 @@ if "%option%"=="1" (
 ) else if "%option%"=="4" (
     VBoxManage list ostypes
 ) else if "%option%"=="5" (
-    call %~dp0createvm.bat
+    call "%~dp0createvm.bat"
 ) else if "%option%"=="6" (
-    call %~dp0modifyVM.bat
+    call "%~dp0modifyVM.bat"
 ) else if "%option%"=="7" (
-    call %~dp0startvm.bat
+    call "%~dp0startvm.bat"
 ) else if "%option%"=="8" (
-    call %~dp0controlVM.bat
+    call "%~dp0controlVM.bat"
 ) else (
     echo You entered an Invalid option
 )
