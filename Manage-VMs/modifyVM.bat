@@ -51,7 +51,7 @@ set /p ram=Select RAM option:
 
 if "%ram%"=="0" goto options
 call :setRamSize %ram% %vmName%
-goto RamMenu
+goto options
 
 :setRamSize
 if "%1"=="1" (
@@ -76,33 +76,25 @@ if errorlevel 1 (
 ) else (
     echo Memory of %2 modified to %ram_size%MB successfully!
     pause
-    goto RamMenu
+    goto options
 )
 
 :HardDriveModify
-echo.
 echo Modify %vmName% Virtual Hard Disk size
-set /p hddSize = Enter Hard Disk Size in GB: 
-set VHDSize=%hddSize%*1024
-set vdiFilePath=!vms_path!!vmName!\!vmName!.vdi
+set /p "hddSize=Enter Hard Disk Size in MB: "
+for /f %%a in ("!hddSize!") do set "VHDSize=%%a"
+set /a "VHDSize=!VHDSize! * 1024"
+set vdiFilePath="!vms_path!!vmName!\!vmName!.vdi"
 VBoxManage createmedium disk --filename %vdiFilePath% --size %VHDSize%
 if errorlevel 1 (
-    echo Error modifying VHD of %2.
+    echo Error modifying VHD of %vmName%.
     pause
-    goto HardDriveModify
+    goto options
 ) else (
-    echo VHD of %2 modified to %hddSize%GB successfully!
+    echo VHD of %vmName% modified to %hddSize%GB successfully!
     pause
-    goto controllers
 )
-VBoxManage storagectl %vmName% --name %controllerName% --add IDE --controller %controllerType%
 
-:: attach storage to controller and instalation medium
-VBoxManage storageattach %vmName% --storagectl %controllerName% --port 1 --device 0 --type dvddrive --medium %vdiFilePath%
-
-
-:controllerMenu
-echo.
 echo Controller Menu
 echo.
 echo 1: SATA
@@ -110,36 +102,63 @@ echo 2: IDE
 echo 3: SCSI
 echo 0: Exit
 
-set /p controllerName=Select the controller Name: 
-set /p controllerType=
+set /p controller=Select the controller Name: 
 
-if "%controllerName%"=="0" goto options
-call :setControllers
-goto
+if "%controller%"=="0" goto options
 
-:setControllers
-if "%1"=="1" (
+if "%controller%"=="1" (
     set controllerName="SATA Controller"
     set controllerType=IntelAhci
-) else if "%1"=="2" (
+) else if "%controller%"=="2" (
     set controllerName="IDE Controller"
     set controllerType=PIIX4
 ) else (
     echo Invalid Controller Name.
     pause
-    goto controllerMenu
+    goto options
+
 )
+
+VBoxManage storagectl %vmName% --name %controllerName% --add sata --controller %controllerType%
+echo %controllerName% Added Successfully
+:: attach storage to controller and instalation medium
+VBoxManage storageattach %vmName% --storagectl %controllerName% --port 1 --device 0 --type dvddrive --medium %vdiFilePath%
+echo Storage contoller added successfully
+
 
 :InstallationMedia
 echo.
 set /p mediaPath=Enter the Path to your Installation Media (eg .iso): 
+echo.
 echo Please Note that the IDE controller is recomended.
-goto controllerMenu
+echo Controller Menu
+echo.
+echo 1: SATA
+echo 2: IDE
+echo 3: SCSI
+echo 0: Exit
 
+set /p controller=Select the controller Name: 
+
+if "%controller%"=="0" goto options
+
+if "%controller%"=="1" (
+    set controllerName="SATA Controller"
+    set controllerType=IntelAhci
+) else if "%controller%"=="2" (
+    set controllerName="IDE Controller"
+    set controllerType=PIIX4
+) else (
+    echo Invalid Controller Name.
+    pause
+    goto options
+
+)
 VBoxManage storagectl %vmName% --name %controllerName% --add IDE --controller %controllerType%
-
+echo %controllerName% Added Successfully
 :: attach storage to controller and instalation medium
 VBoxManage storageattach %vmName% --storagectl %controllerName% --port 1 --device 0 --type dvddrive --medium %mediaPath%
+echo Installation Media Installed successfully
 
 :end
 exit /b
