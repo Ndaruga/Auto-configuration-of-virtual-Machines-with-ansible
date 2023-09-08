@@ -25,10 +25,11 @@ echo GENERAL VIRTUAL MACHINE SETTINGS
 echo 1: Allocate amount of RAM
 echo 2: Setting up a virtual hard drive
 echo 3: Setting up and attaching the Installation Media (e.g., ISO)
+echo 0: Back to Main Menu
 echo.
 set /p option=Enter an option:
 echo.
-
+if "%option%"=="0" call "%~dp0main.bat"
 if "%option%"=="1" goto RamMenu
 if "%option%"=="2" goto HardDriveModify
 if "%option%"=="3" goto InstallationMedia
@@ -81,7 +82,7 @@ if errorlevel 1 (
 
 :HardDriveModify
 echo Modify %vmName% Virtual Hard Disk size
-set /p "hddSize=Enter Hard Disk Size in MB: "
+set /p "hddSize=Enter Hard Disk Size in GB: "
 for /f %%a in ("!hddSize!") do set "VHDSize=%%a"
 set /a "VHDSize=!VHDSize! * 1024"
 set vdiFilePath="!vms_path!!vmName!\!vmName!.vdi"
@@ -91,7 +92,7 @@ if errorlevel 1 (
     pause
     goto options
 ) else (
-    echo VHD of %vmName% modified to %hddSize%GB successfully!
+    echo VHD of %vmName% modified to %hddSize% GB successfully!
     pause
 )
 
@@ -122,7 +123,7 @@ if "%controller%"=="1" (
 VBoxManage storagectl %vmName% --name %controllerName% --add sata --controller %controllerType%
 echo %controllerName% Added Successfully
 :: attach storage to controller and instalation medium
-VBoxManage storageattach %vmName% --storagectl %controllerName% --port 1 --device 0 --type dvddrive --medium %vdiFilePath%
+VBoxManage storageattach %vmName% --storagectl %controllerName% --port 0 --device 0 --type hdd --medium %vdiFilePath%
 echo Storage contoller added successfully
 
 
