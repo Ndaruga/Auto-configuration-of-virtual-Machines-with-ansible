@@ -9,7 +9,7 @@ set /p osType="Enter the OS type (e.g., Windows10_64, Ubuntu_64): "
 VBoxManage createvm --name %vmName% --ostype %osType% --register
 
 echo.
-echo Would you like to Modify the VM further? (Y/n)
+echo Would you like to Modify any VM? (Y/n)
 set /p modify=
 if "%modify%" == "y" (
     call "%~dp0modifyVM.bat"
