@@ -45,7 +45,7 @@ echo Menu:
 echo 1. Set VM RAM to 512MB
 echo 2. Set VM RAM to 1024MB
 echo 3. Set VM RAM to 2048MB
-echo 9. Custom RAM Size
+echo 4. Custom RAM Size
 echo 0. Exit to Main Menu
 echo.
 set /p ram=Select RAM option: 
